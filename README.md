@@ -1,4 +1,4 @@
-# ShardM SAP DM POD Plugin Generator
+# SHAR-DM SAP DM POD Plugin Generator
 
 > A Visual Studio Code extension for scaffolding SAP Digital Manufacturing (DM) POD plugins across all major POD versions — from legacy SAPUI5 to modern React.
 
@@ -61,7 +61,7 @@ This extension provides a **Webview-based graphical interface** inside VS Code t
 
 1. Open an **empty folder** in VS Code (`File > Open Folder...`)
 2. Open Command Palette (`Ctrl+Shift+P`)
-3. Run **ShardM: Create SAP DM POD Plugin**
+3. Run **SHAR-DM: Create SAP DM POD Plugin**
 4. Fill in the Webview form:
    - Select **POD Version** (radio buttons)
    - Enter **Plugin Name**, **Namespace**, **POD Designer Name**
@@ -71,7 +71,7 @@ This extension provides a **Webview-based graphical interface** inside VS Code t
 
 ### Package for Deployment
 
-- `Ctrl+Shift+P` → **ShardM: ZIP Workspace**
+- `Ctrl+Shift+P` → **SHAR-DM: ZIP Workspace**
 - Or right-click the status bar → **ZIP all files in the current workspace**
 
 The ZIP behaviour adapts to the POD version automatically.
@@ -115,8 +115,8 @@ my-plugin/
 
 | Command Palette Entry | Command ID | When |
 |---|---|---|
-| `ShardM: Create SAP DM POD Plugin` | `SHARD_M.POD_Plugin` | Always |
-| `ShardM: ZIP Workspace` | `SHARD_M.zipWorkspace` | Workspace open |
+| `SHAR-DM: Create SAP DM POD Plugin` | `SHARD_M.POD_Plugin` | Always |
+| `SHAR-DM: ZIP Workspace` | `SHARD_M.zipWorkspace` | Workspace open |
 
 ---
 
@@ -136,7 +136,7 @@ npm run package
 # Debug in VS Code
 code .
 # Press F5 → Extension Development Host opens
-# Ctrl+Shift+P → ShardM: Create SAP DM POD Plugin
+# Ctrl+Shift+P → SHAR-DM: Create SAP DM POD Plugin
 ```
 
 ---

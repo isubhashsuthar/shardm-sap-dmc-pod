@@ -16,7 +16,7 @@ function activate(context) {
 	const disposable = vscode.commands.registerCommand('SHARD_M.POD_Plugin', function () {
 		const panel = vscode.window.createWebviewPanel(
 			'generator',
-			'ShardM SAP DM POD Plugin Generator',
+			'SHAR-DM SAP DM POD Plugin Generator',
 			vscode.ViewColumn.One,
 			{ enableScripts: true }
 		);
@@ -278,7 +278,7 @@ function getWebviewContent() {
 <body>
 
 	<div class="header">
-		<h1>ShardM SAP DM POD Plugin Generator <span class="badge">v0.0.2</span></h1>
+		<h1>SHAR-DM SAP DM POD Plugin Generator <span class="badge">v0.0.2</span></h1>
 		<p>Scaffold production-ready SAP DMC POD plugins for any POD version</p>
 	</div>
 

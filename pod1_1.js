@@ -11,60 +11,60 @@ function generatePod1_1Files({ context, pluginname, hostname, namespace, podopti
         return;
     }
     const targetDir = workspaceFolders[0].uri.fsPath;
-    const templateRoot = path.join(context.extensionPath, 'templates', 'pod1_1');
-    const namespacePath = (namespace || 'company.custom.plugins').replace(/\./g, '/');
+    const tpl = path.join(context.extensionPath, 'templates', 'pod1_1');
+    const nsPath = (namespace || 'company.custom.plugins').replace(/\./g, '/');
     const multiple = miscoptions ? miscoptions.includes('multiple') : false;
     const ppenabled = miscoptions ? miscoptions.includes('ppenabled') : false;
-    const podOptionsStr = JSON.stringify(podoptions || []);
-    const languagesStr = languages && languages.length > 0 ? JSON.stringify(languages) : JSON.stringify(['en']);
-    const thirdPartyStr = thirdpartylibs && thirdpartylibs.length > 0
+    const podOpts = JSON.stringify(podoptions || []);
+    const langStr = languages && languages.length > 0 ? JSON.stringify(languages) : JSON.stringify(['en']);
+    const thirdParty = thirdpartylibs && thirdpartylibs.length > 0
         ? JSON.stringify(thirdpartylibs.map(l => `3rdparty/${l}.min.js`))
         : '[]';
-    const appTitle = PODname || pluginname;
-    const appDescription = PODname || pluginname;
 
-    const vars = { pluginname, hostname, namespace, namespacePath, version,
+    const v = { pluginname, hostname, namespace, namespacePath: nsPath, version,
         multiple: String(multiple), ppenabled: String(ppenabled),
-        podOptions: podOptionsStr, selectedLanguages: languagesStr,
-        thirdPartyIncludes: thirdPartyStr,
-        podDisplayName: PODname, appTitle, appDescription };
+        podOptions: podOpts, selectedLanguages: langStr,
+        thirdPartyIncludes: thirdParty, podDisplayName: PODname,
+        appTitle: PODname || pluginname, appDescription: PODname || pluginname };
 
-    const files = [
-        'mta.yaml', 'xs-security.json', 'xs-app.json', 'index.html',
-        'manifest.json', 'Component.js', 'MainView.view.xml', 'MainView.controller.js',
-        'PropertyEditor.js', 'components.json', 'models.js', 'serviceBindings.js',
-        'builder.properties', 'i18n.properties', 'style.css', 'package.json', '.gitignore'
-    ];
+    const root = targetDir;
 
-    files.forEach(f => {
-        const src = path.join(templateRoot, f);
-        if (!fs.existsSync(src)) return;
-        try {
-            const content = generateFromTemplate(src, vars);
-            const outPath = path.join(targetDir, f);
-            fs.writeFileSync(outPath, content, 'utf-8');
-            vscode.window.showInformationMessage(`Created: ${f}`);
-        } catch (err) {
-            vscode.window.showErrorMessage(`Error creating ${f}: ${err.message}`);
-        }
-    });
+    const write = (src, dest) => {
+        const fp = path.join(tpl, src);
+        if (!fs.existsSync(fp)) return;
+        const content = generateFromTemplate(fp, v);
+        const out = path.join(root, dest);
+        fs.mkdirSync(path.dirname(out), { recursive: true });
+        fs.writeFileSync(out, content, 'utf-8');
+    };
+
+    write('index.html', 'index.html');
+    write('components.json', 'designer/components.json');
+    write('Component.js', 'Component.js');
+    write('manifest.json', 'manifest.json');
+    write('serviceBindings.js', 'serviceBindings.js');
+    write('PropertyEditor.js', 'builder/PropertyEditor.js');
+    write('MainView.controller.js', 'controller/MainView.controller.js');
+    write('style.css', 'css/style.css');
+    write('builder.properties', 'i18n/builder.properties');
+    write('i18n.properties', 'i18n/i18n.properties');
+    write('models.js', 'models/models.js');
+    write('MainView.view.xml', 'view/MainView.view.xml');
 
     if (languages && languages.length > 0) {
+        const i18nOut = path.join(root, 'i18n');
+        fs.mkdirSync(i18nOut, { recursive: true });
         languages.forEach(lang => {
             ['i18n', 'builder'].forEach(prefix => {
-                const src = path.join(templateRoot, 'i18n', `${prefix}_${lang}.properties`);
+                const src = path.join(tpl, 'i18n', `${prefix}_${lang}.properties`);
                 if (!fs.existsSync(src)) return;
-                try {
-                    const content = generateFromTemplate(src, vars);
-                    const i18nDir = path.join(targetDir, 'i18n');
-                    fs.mkdirSync(i18nDir, { recursive: true });
-                    fs.writeFileSync(path.join(i18nDir, `${prefix}_${lang}.properties`), content, 'utf-8');
-                } catch (err) {
-                    vscode.window.showErrorMessage(`Error creating i18n file: ${err.message}`);
-                }
+                const content = generateFromTemplate(src, v);
+                fs.writeFileSync(path.join(i18nOut, `${prefix}_${lang}.properties`), content, 'utf-8');
             });
         });
     }
+
+    vscode.window.showInformationMessage(`POD 1.1 project created: ${pluginname}`);
 }
 
 module.exports = { generatePod1_1Files };

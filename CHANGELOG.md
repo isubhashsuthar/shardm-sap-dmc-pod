@@ -3,7 +3,7 @@
 ## 0.0.2 (2026-06-19)
 
 - Fixed: Removed empty `activationEvents` that blocked command registration
-- Fixed: Clearer command titles with `ShardM:` prefix
+- Fixed: Clearer command titles with `SHAR-DM:` prefix
 - Added: README.md (meta), LICENSE.txt, CHANGELOG.md (meta), extension icon
 - Added: `repository` field in package.json
 

@@ -1,7 +1,7 @@
 {
   "name": "shardm-sap-dmc-pod",
-  "displayName": "ShardM SAP DM POD Plugin Generator",
-  "description": "SAP DMC POD Plugin Generator by ShardM — supports POD 1.0, 1.1, 1.1 CLI, 2.0 UI5, and 2.0 React",
+  "displayName": "SHAR-DM SAP DM POD Plugin Generator",
+  "description": "SAP DMC POD Plugin Generator by SHAR-DM — supports POD 1.0, 1.1, 1.1 CLI, 2.0 UI5, and 2.0 React",
   "publisher": "shardm",
   "icon": "images/icon.png",
   "version": "0.0.2",
@@ -15,8 +15,8 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [
-      { "command": "SHARD_M.POD_Plugin", "title": "ShardM: Create SAP DM POD Plugin" },
-      { "command": "SHARD_M.zipWorkspace", "title": "ShardM: ZIP Workspace" }
+      { "command": "SHARD_M.POD_Plugin", "title": "SHAR-DM: Create SAP DM POD Plugin" },
+      { "command": "SHARD_M.zipWorkspace", "title": "SHAR-DM: ZIP Workspace" }
     ],
     "menus": {
       "commandPalette": [
