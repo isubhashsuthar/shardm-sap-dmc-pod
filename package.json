@@ -10,7 +10,8 @@
     "url": "https://github.com/shardm/shardm-sap-dmc-pod"
   },
   "engines": { "vscode": "^1.99.3" },
-  "categories": ["Other"],
+  "categories": ["Programming Languages", "Formatters", "Other"],
+  "keywords": ["sap", "dmc", "pod", "plugin", "sapui5", "react", "scaffold", "generator"],
   "main": "./extension.js",
   "contributes": {
     "commands": [
