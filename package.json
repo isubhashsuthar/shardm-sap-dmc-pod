@@ -4,7 +4,7 @@
   "description": "SAP DMC POD Plugin Generator by SHAR-DM — supports POD 1.0, 1.1, 1.1 CLI, 2.0 UI5, and 2.0 React",
   "publisher": "shardm",
   "icon": "images/icon.png",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/shardm/shardm-sap-dmc-pod"
@@ -13,6 +13,10 @@
   "categories": ["Programming Languages", "Formatters", "Other"],
   "keywords": ["sap", "dmc", "pod", "plugin", "sapui5", "react", "scaffold", "generator"],
   "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:SHARD_M.POD_Plugin",
+    "onCommand:SHARD_M.zipWorkspace"
+  ],
   "contributes": {
     "commands": [
       { "command": "SHARD_M.POD_Plugin", "title": "SHAR-DM: Create SAP DM POD Plugin" },
