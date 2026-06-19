@@ -11,35 +11,48 @@ function generatePod2_0UI5Files({ context, pluginname, hostname, namespace, podo
         return;
     }
     const targetDir = workspaceFolders[0].uri.fsPath;
-    const templateRoot = path.join(context.extensionPath, 'templates', 'pod2_0_ui5');
-    const namespacePath = (namespace || 'company.custom.plugins').replace(/\./g, '/');
+    const tpl = path.join(context.extensionPath, 'templates', 'pod2_0_ui5');
+    const nsPath = (namespace || 'company.custom.plugins').replace(/\./g, '/');
 
-    const vars = { pluginname, namespace, namespacePath, version,
+    const v = { pluginname, namespace, namespacePath: nsPath, version,
         podDisplayName: PODname || pluginname, PODGroup: PODGroup || 'Custom',
         icon: icon || 'sap-icon://locate-me-2', description: description || 'Description' };
 
-    const files = ['extension.json', 'plugin.js', '.gitignore'];
-    files.forEach(f => {
-        const src = path.join(templateRoot, f);
-        if (!fs.existsSync(src)) return;
-        try {
-            const content = generateFromTemplate(src, vars);
-            const outPath = path.join(targetDir, f);
-            fs.writeFileSync(outPath, content, 'utf-8');
-            vscode.window.showInformationMessage(`Created: ${f}`);
-        } catch (err) {
-            vscode.window.showErrorMessage(`Error creating ${f}: ${err.message}`);
-        }
-    });
+    const root = targetDir;
 
-    // Copy i18n
-    const i18nDir = path.join(targetDir, 'i18n');
-    fs.mkdirSync(i18nDir, { recursive: true });
-    const i18nSrc = path.join(templateRoot, 'i18n', 'i18n.properties');
-    if (fs.existsSync(i18nSrc)) {
-        const content = generateFromTemplate(i18nSrc, vars);
-        fs.writeFileSync(path.join(i18nDir, 'i18n.properties'), content, 'utf-8');
+    const write = (src, dest) => {
+        const fp = path.join(tpl, src);
+        if (!fs.existsSync(fp)) return;
+        try {
+            const content = generateFromTemplate(fp, v);
+            const out = path.join(root, dest);
+            fs.mkdirSync(path.dirname(out), { recursive: true });
+            fs.writeFileSync(out, content, 'utf-8');
+        } catch (err) {
+            vscode.window.showErrorMessage(`Error creating ${dest}: ${err.message}`);
+        }
+    };
+
+    write('extension.json', 'extension.json');
+    write('plugin.js', `plugin/${pluginname}.js`);
+    write('i18n/i18n.properties', 'i18n/i18n.properties');
+
+    if (languages && languages.length > 0) {
+        const i18nOut = path.join(root, 'i18n');
+        fs.mkdirSync(i18nOut, { recursive: true });
+        languages.forEach(lang => {
+            const src = path.join(tpl, 'i18n', `i18n_${lang}.properties`);
+            if (!fs.existsSync(src)) return;
+            try {
+                const content = generateFromTemplate(src, v);
+                fs.writeFileSync(path.join(i18nOut, `i18n_${lang}.properties`), content, 'utf-8');
+            } catch (err) {
+                vscode.window.showErrorMessage(`Error creating i18n/i18n_${lang}.properties: ${err.message}`);
+            }
+        });
     }
+
+    vscode.window.showInformationMessage(`POD 2.0 UI5 project created: ${pluginname}`);
 }
 
 module.exports = { generatePod2_0UI5Files };
