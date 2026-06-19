@@ -1,6 +1,6 @@
 {
   "name": "shardm-sap-dmc-pod",
-  "displayName": "SHAR-DM SAP DM POD Plugin Generator",
+  "displayName": "SHAR-DM SAP Digital Manufacturing POD Plugin Generator",
   "description": "SAP DMC POD Plugin Generator by SHAR-DM — supports POD 1.0, 1.1, 1.1 CLI, 2.0 UI5, and 2.0 React",
   "publisher": "shardm",
   "icon": "images/icon.png",
