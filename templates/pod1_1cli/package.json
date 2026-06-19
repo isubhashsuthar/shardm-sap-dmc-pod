@@ -1,0 +1,16 @@
+{
+  "name": "{{pluginname}}",
+  "scripts": {
+    "start": "ui5 serve",
+    "build": "ui5 build --all"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^3"
+  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

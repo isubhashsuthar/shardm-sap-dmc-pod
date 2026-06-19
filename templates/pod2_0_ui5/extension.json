@@ -1,0 +1,8 @@
+{
+    "widgets": [
+        {
+            "modulePath": "{{namespacePath}}/{{pluginname}}/plugin/{{pluginname}}",
+            "type": "{{namespace}}.{{pluginname}}.plugin.{{pluginname}}"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "{{pluginname}}",
+  "version": "{{version}}",
+  "description": "",
+  "devDependencies": {},
+  "dependencies": {
+    "@sap/approuter": "latest"
+  },
+  "scripts": {
+    "start": "node node_modules/@sap/approuter/approuter.js"
+  }
+}

@@ -1,0 +1,15 @@
+{
+	"components": [
+		{
+			"id": "{{pluginname}}",
+			"type": "VIEW_PLUGIN",
+			"allowMultipleInstances": {{multiple}},
+			"name": "{{namespace}}.{{pluginname}}",
+			"propertyEditor": "{{namespace}}.{{pluginname}}.builder.PropertyEditor",
+			"i18n": "{{namespace}}.{{pluginname}}.i18n.i18n",
+            "productionProcessEnabled": {{ppenabled}},
+           "productionProcessTitle": "{{pluginname}}",
+			"supportedPodTypes": {{podoptions}}
+		}   
+	]
+}

@@ -1,0 +1,14 @@
+{
+  "welcomeFile": "/{{pluginname}}/index.html",
+  "authenticationMethod": "none",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/{{pluginname}}/(.*)$",
+      "target": "$1",
+      "localDir": "webapp"
+    }
+  ]
+}
